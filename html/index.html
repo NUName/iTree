@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+<body>
+	<div class="">
+		<button id="btn1" >allCheck</button>
+		<button id="btn2" >unAllCheck</button>
+		<button id="btn3" >check</button>
+		<button id="btn4" >unCheck</button>
+		<button id="btn5" >LockExpand</button>
+		<button id="btn6" >unLockExpand</button>
+		<button id="btn7" >allExpend</button>
+		<button id="btn8" >allUnExpend</button>
+		<button id="btn9" >expendLabel</button>
+		<button id="btn10" >destroy</button>
+		<button id="btn11" >refresh</button>
+		<div id="bv2" style="height: 500px">
+			
+		</div>
+	</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+<script type="text/javascript" src="iTree.js"></script>
+<script type="text/javascript">
+	var formData = new FormData();
+	formData.append('token', 'c4ff8fabd517422494c8e04418214f5a');
+	fetch('../js/data.json',{
+		method : 'post',
+		 body: formData
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log(data)
+		$('#bv2').iTree({
+			data : data,
+			allExpand : true,
+			pickType : 'check',
+			onExpend : function(){
+				 
+			},
+			onAllCheck : function(){
+
+			},
+			onCheckLabel : function(data){
+				console.log(data)
+				//alert(1)
+			}
+		})
+	})
+	
+	$('#btn1').on('click',function(){
+		console.log($('#bv2').iTree('allCheck'))
+	})
+
+	$('#btn2').on('click',function(){
+		console.log($('#bv2').iTree('unAllCheck'))
+	})
+
+	$('#btn3').on('click',function(){
+		var a = $('#bv2').iTree('check','000101011001')
+		console.log(a)
+	})
+    $('#btn4').on('click',function(){
+		var a = $('#bv2').iTree('unCheck','000101011001')
+		console.log(a)
+	})
+	$('#btn5').on('click',function(){
+		var a = $('#bv2').iTree('lockExpand')
+		console.log(a)
+	})
+	$('#btn6').on('click',function(){
+		var a = $('#bv2').iTree('unLockExpand')
+		console.log(a)
+	})
+	$('#btn7').on('click',function(){
+		var a = $('#bv2').iTree('allExpend')
+		console.log(a)
+	})
+	$('#btn8').on('click',function(){
+		var a = $('#bv2').iTree('allUnExpend')
+		console.log(a)
+	})
+	$('#btn9').on('click',function(){
+		var a = $('#bv2').iTree('expendLabel','000101041027')
+		console.log(a)
+	})
+	$('#btn10').on('click',function(){
+		var a = $('#bv2').iTree('destroy')
+		console.log(a)
+	})
+	$('#btn11').on('click',function(){
+		var a = $('#bv2').iTree('refresh')
+		//console.log(a)
+	})
+</script>
+</html>
